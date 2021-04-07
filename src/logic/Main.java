@@ -74,7 +74,6 @@ public class Main {
                 for (State state : destiny.states) {
                     if (state.name.equals(transition.source)) {
                         state.inputTR.add(newTransition);
-                        state.outputTR.add(newTransition);
                         state.hasLoop = true;
                         newTransition.start = newTransition.end = state;
                         break;
