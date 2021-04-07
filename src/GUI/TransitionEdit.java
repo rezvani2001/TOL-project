@@ -47,6 +47,13 @@ public class TransitionEdit extends Stage {
 
     private void makeApplyButton() {
         Button applyButton = new Button("Apply");
+        applyButton.setOnMouseClicked(event -> {
+            this.selectedTransition.start = this.statesForStart.getValue();
+            this.selectedTransition.end = this.statesForEnd.getValue();
+            this.selectedTransition.label = this.alphabets.getValue();
+            this.selectedTransition.name = this.inputName.getText();
+            this.close();
+        });
         this.mainPane.getChildren().add(applyButton);
     }
 
