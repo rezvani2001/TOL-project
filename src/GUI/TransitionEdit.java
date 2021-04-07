@@ -1,7 +1,6 @@
 package GUI;
 
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -13,17 +12,18 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import logic.Main;
 import logic.processData.State;
-
-import java.util.Arrays;
+import logic.processData.Transitions;
 
 public class TransitionEdit extends Stage {
+    private Transitions selectedTransition;
     private TextField inputName;
     private ComboBox<State> statesForStart;
     private ComboBox<State> statesForEnd;
     private ComboBox<String> alphabets;
     private VBox mainPane;
 
-    public TransitionEdit() {
+    public TransitionEdit(Transitions selectedTransition) {
+        this.selectedTransition = selectedTransition;
         this.makeScene();
     }
 
@@ -52,25 +52,28 @@ public class TransitionEdit extends Stage {
 
     private void makeNamePart() {
         Label nameLabel = new Label("Name :");
-        this.inputName = new TextField();
+        this.inputName = new TextField(this.selectedTransition.name);
         this.addNewPart(nameLabel, this.inputName);
     }
 
     private void makeTransitionLabelPart() {
         Label transitionLabel = new Label("Alphabet :");
         this.alphabets = new ComboBox<>(FXCollections.observableArrayList(Main.automatas.alphabets));
+        this.alphabets.getSelectionModel().select(Main.automatas.alphabets.indexOf(this.selectedTransition.label));
         this.addNewPart(transitionLabel, this.alphabets);
     }
 
     private void makeStartStatePart() {
         Label transitionStartPoint = new Label("From :");
         this.statesForStart = new ComboBox<>(FXCollections.observableArrayList(Main.automatas.states));
+        this.statesForStart.getSelectionModel().select(Main.automatas.states.indexOf(this.selectedTransition.start));
         this.addNewPart(transitionStartPoint, this.statesForStart);
     }
 
     private void makeEndStatePart() {
         Label transitionEndPoint = new Label("To :");
         this.statesForEnd = new ComboBox<>(FXCollections.observableArrayList(Main.automatas.states));
+        this.statesForEnd.getSelectionModel().select(Main.automatas.states.indexOf(this.selectedTransition.end));
         this.addNewPart(transitionEndPoint, this.statesForEnd);
     }
 

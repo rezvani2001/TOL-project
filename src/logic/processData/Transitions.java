@@ -28,7 +28,7 @@ public class Transitions {
                     this.start.centerY, this.label, this.name).pane;
 
             transitionPane.setOnMouseClicked(event -> {
-                Platform.runLater(() -> new TransitionEdit());
+                Platform.runLater(() -> new TransitionEdit(this));
             });
 
             Platform.runLater(() -> {
@@ -43,6 +43,10 @@ public class Transitions {
                     this.start.centerX, this.start.centerY,
                     this.end.centerX, this.end.centerY
             ).pane;
+
+            transitionPane.setOnMouseClicked(event -> {
+                Platform.runLater(() -> new TransitionEdit(this));
+            });
 
 
             Platform.runLater(() -> {

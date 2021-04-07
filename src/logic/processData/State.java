@@ -123,4 +123,9 @@ public class State {
         this.UIState = circlePane;
         return circlePane;
     }
+
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }
