@@ -48,11 +48,32 @@ public class TransitionEdit extends Stage {
     private void makeApplyButton() {
         Button applyButton = new Button("Apply");
         applyButton.setOnMouseClicked(event -> {
+            selectedTransition.start.outputTR.remove(selectedTransition);
+            selectedTransition.end.inputTR.remove(selectedTransition);
+
             this.selectedTransition.start = this.statesForStart.getValue();
             this.selectedTransition.end = this.statesForEnd.getValue();
             this.selectedTransition.label = this.alphabets.getValue();
             this.selectedTransition.name = this.inputName.getText();
             // TODO implement changing the transition in GUI
+
+            if (selectedTransition.start == selectedTransition.end) {
+                selectedTransition.isLoop = true;
+
+                selectedTransition.start.inputTR.add(selectedTransition);
+
+            } else {
+                selectedTransition.isLoop = false;
+
+                selectedTransition.end.inputTR.add(selectedTransition);
+                selectedTransition.start.outputTR.add(selectedTransition);
+            }
+
+
+
+            Draw.pane.getChildren().remove(selectedTransition.uiTR);
+            selectedTransition.transitionPane();
+
             this.close();
         });
         this.mainPane.getChildren().add(applyButton);

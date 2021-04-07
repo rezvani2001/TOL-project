@@ -9,6 +9,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
+import logic.Main;
 
 public class Transitions {
     public String name;
@@ -30,20 +31,23 @@ public class Transitions {
             transitionPane = new ArrowToItSelf(this.start.centerX,
                     this.start.centerY, this.label, this.name).pane;
 
-            transitionPane.setOnMouseClicked(event -> {
-                Platform.runLater(() -> {
-                    if (event.getButton() == MouseButton.PRIMARY)
-                        new TransitionEdit(this);
-                    else if (event.getButton() == MouseButton.SECONDARY) {
-                        new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete transition " + this.name + "?", ButtonType.YES, ButtonType.NO)
-                                .showAndWait().ifPresent(buttonType -> {
-                            if (buttonType == ButtonType.YES) {
-                                // TODO implement deleting transition from GUI
-                            }
-                        });
-                    }
-                });
-            });
+            transitionPane.setOnMouseClicked(event -> Platform.runLater(() -> {
+                if (event.getButton() == MouseButton.PRIMARY)
+                    new TransitionEdit(this);
+                else if (event.getButton() == MouseButton.SECONDARY) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete transition " +
+                            this.name + "?", ButtonType.YES, ButtonType.NO)
+                            .showAndWait().ifPresent(buttonType -> {
+                        if (buttonType == ButtonType.YES) {
+                            // TODO implement deleting transition from GUI
+                            Main.automatas.transitions.remove(this);
+                            this.start.inputTR.remove(this);
+
+                            Draw.pane.getChildren().remove(this.uiTR);
+                        }
+                    });
+                }
+            }));
 
             Platform.runLater(() -> {
                 Draw.pane.getChildren().addAll(transitionPane);
@@ -58,15 +62,21 @@ public class Transitions {
                     this.end.centerX, this.end.centerY
             ).pane;
 
-            transitionPane.setOnMouseClicked(event -> {
+            transitionPane.getChildren().get(0).setOnMouseClicked(event -> {
                 Platform.runLater(() -> {
                     if (event.getButton() == MouseButton.PRIMARY)
                         new TransitionEdit(this);
                     else if (event.getButton() == MouseButton.SECONDARY) {
-                        new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete transition " + this.name + "?", ButtonType.YES, ButtonType.NO)
+                        new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete transition "
+                                + this.name + "?", ButtonType.YES, ButtonType.NO)
                                 .showAndWait().ifPresent(buttonType -> {
                             if (buttonType == ButtonType.YES) {
                                 // TODO implement deleting transition from GUI
+                                Main.automatas.transitions.remove(this);
+                                this.start.outputTR.remove(this);
+                                this.end.inputTR.remove(this);
+
+                                Draw.pane.getChildren().remove(this.uiTR);
                             }
                         });
                     }
