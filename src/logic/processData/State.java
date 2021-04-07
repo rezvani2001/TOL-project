@@ -49,7 +49,7 @@ public class State {
             if (event1.getButton() == MouseButton.PRIMARY) {
                 Platform.runLater(() -> new CircleEdit(this));
             } else if (event1.getButton() == MouseButton.SECONDARY) {
-                new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete this state " + this.name + "?", ButtonType.YES, ButtonType.NO)
+                new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete state " + this.name + "?", ButtonType.YES, ButtonType.NO)
                         .showAndWait().ifPresent(buttonType -> {
                     if (buttonType == ButtonType.YES) {
 

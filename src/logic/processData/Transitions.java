@@ -5,6 +5,9 @@ import GUI.Shapes.ArrowToItSelf;
 import GUI.Shapes.RegularArrow;
 import GUI.TransitionEdit;
 import javafx.application.Platform;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
+import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 
 public class Transitions {
@@ -28,7 +31,18 @@ public class Transitions {
                     this.start.centerY, this.label, this.name).pane;
 
             transitionPane.setOnMouseClicked(event -> {
-                Platform.runLater(() -> new TransitionEdit(this));
+                Platform.runLater(() -> {
+                    if (event.getButton() == MouseButton.PRIMARY)
+                        new TransitionEdit(this);
+                    else if (event.getButton() == MouseButton.SECONDARY) {
+                        new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete transition " + this.name + "?", ButtonType.YES, ButtonType.NO)
+                                .showAndWait().ifPresent(buttonType -> {
+                            if (buttonType == ButtonType.YES) {
+                                // TODO implement deleting transition from GUI
+                            }
+                        });
+                    }
+                });
             });
 
             Platform.runLater(() -> {
@@ -45,7 +59,18 @@ public class Transitions {
             ).pane;
 
             transitionPane.setOnMouseClicked(event -> {
-                Platform.runLater(() -> new TransitionEdit(this));
+                Platform.runLater(() -> {
+                    if (event.getButton() == MouseButton.PRIMARY)
+                        new TransitionEdit(this);
+                    else if (event.getButton() == MouseButton.SECONDARY) {
+                        new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete transition " + this.name + "?", ButtonType.YES, ButtonType.NO)
+                                .showAndWait().ifPresent(buttonType -> {
+                            if (buttonType == ButtonType.YES) {
+                                // TODO implement deleting transition from GUI
+                            }
+                        });
+                    }
+                });
             });
 
 

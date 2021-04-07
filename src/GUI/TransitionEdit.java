@@ -52,6 +52,7 @@ public class TransitionEdit extends Stage {
             this.selectedTransition.end = this.statesForEnd.getValue();
             this.selectedTransition.label = this.alphabets.getValue();
             this.selectedTransition.name = this.inputName.getText();
+            // TODO implement changing the transition in GUI
             this.close();
         });
         this.mainPane.getChildren().add(applyButton);
