@@ -1,4 +1,7 @@
 package GUI;
 
-public class TransitionEdit {
+import javafx.stage.Stage;
+
+public class TransitionEdit extends Stage {
+    
 }
