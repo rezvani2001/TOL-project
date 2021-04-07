@@ -15,7 +15,7 @@ import logic.processData.State;
 import logic.processData.Transitions;
 
 public class TransitionEdit extends Stage {
-    private Transitions selectedTransition;
+    private final Transitions selectedTransition;
     private TextField inputName;
     private ComboBox<State> statesForStart;
     private ComboBox<State> statesForEnd;
