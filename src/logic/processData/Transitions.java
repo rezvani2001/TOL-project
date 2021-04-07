@@ -3,6 +3,7 @@ package logic.processData;
 import GUI.Draw;
 import GUI.Shapes.ArrowToItSelf;
 import GUI.Shapes.RegularArrow;
+import GUI.TransitionEdit;
 import javafx.application.Platform;
 import javafx.scene.layout.AnchorPane;
 
@@ -25,6 +26,10 @@ public class Transitions {
         if (this.isLoop) {
             transitionPane = new ArrowToItSelf(this.start.centerX,
                     this.start.centerY, this.label, this.name).pane;
+
+            transitionPane.setOnMouseClicked(event -> {
+                Platform.runLater(() -> new TransitionEdit());
+            });
 
             Platform.runLater(() -> {
                 Draw.pane.getChildren().addAll(transitionPane);

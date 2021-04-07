@@ -1,5 +1,6 @@
 package GUI;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -12,6 +13,8 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import logic.Main;
 import logic.processData.State;
+
+import java.util.Arrays;
 
 public class TransitionEdit extends Stage {
     private TextField inputName;
@@ -55,19 +58,19 @@ public class TransitionEdit extends Stage {
 
     private void makeTransitionLabelPart() {
         Label transitionLabel = new Label("Alphabet :");
-        this.alphabets = new ComboBox<>((ObservableList<String>) Main.automatas.alphabets);
+        this.alphabets = new ComboBox<>(FXCollections.observableArrayList(Main.automatas.alphabets));
         this.addNewPart(transitionLabel, this.alphabets);
     }
 
     private void makeStartStatePart() {
         Label transitionStartPoint = new Label("From :");
-        this.statesForStart = new ComboBox<>((ObservableList<State>) Main.automatas.states);
+        this.statesForStart = new ComboBox<>(FXCollections.observableArrayList(Main.automatas.states));
         this.addNewPart(transitionStartPoint, this.statesForStart);
     }
 
     private void makeEndStatePart() {
         Label transitionEndPoint = new Label("To :");
-        this.statesForEnd = new ComboBox<>((ObservableList<State>) Main.automatas.states);
+        this.statesForEnd = new ComboBox<>(FXCollections.observableArrayList(Main.automatas.states));
         this.addNewPart(transitionEndPoint, this.statesForEnd);
     }
 
