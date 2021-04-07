@@ -1,0 +1,48 @@
+.root {
+    -fx-background-color: #d6e4f0;
+}
+
+.button {
+    -fx-background-color: #d6e4f0;
+    -fx-border-color: #163172;
+    -fx-border-radius: 40px;
+    -fx-background-radius: 40px;
+    -fx-pref-width: 300px;
+    -fx-pref-height: 40px;
+    -fx-font-family: Tahoma;
+    -fx-font-size: 30px;
+    -fx-font-weight: bolder;
+}
+
+.button:hover {
+    -fx-background-color: #163172;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+}
+
+.text-field {
+    -fx-pref-width: 200px;
+    -fx-pref-height: 40px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+    -fx-font-size: 16px;
+    -fx-font-family: "Arial Black";
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+    -fx-background-color: #d6e4f0;
+    -fx-border-color: #163172;
+}
+
+.label {
+    -fx-pref-width: 100px;
+    -fx-font-size: 19px;
+    -fx-font-family: Consolas;
+}
+
+.check-box {
+    -fx-pref-width: 300px;
+    -fx-alignment: center;
+    -fx-text-alignment: center;
+    -fx-font-size: 18px;
+    -fx-font-weight: bold;
+}

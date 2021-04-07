@@ -1,0 +1,22 @@
+.root {
+    -fx-background-color: #a6fff2;
+}
+
+#SelectInputFileButton {
+    -fx-background-color: #74f9ff;
+    -fx-border-color: #4781B5;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-text-fill: black;
+    -fx-font-family: "Tahoma";
+    -fx-font-size: 17px;
+    -fx-pref-width: 150px;
+}
+
+#WorkSpacePane {
+    -fx-background-radius: 15px;
+    -fx-border-radius: 15px;
+    -fx-background-color: white;
+    -fx-border-color: #4781B5;
+    -fx-border-width: 1
+}
