@@ -36,6 +36,7 @@ public class TransitionEdit extends Stage {
         this.setScene(scene);
         this.setResizable(false);
         this.initModality(Modality.APPLICATION_MODAL);
+        this.setTitle(String.format("Edit Transition %s", this.selectedTransition.name));
         this.show();
     }
 
