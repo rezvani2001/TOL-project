@@ -39,7 +39,6 @@ public class Transitions {
                             this.name + "?", ButtonType.YES, ButtonType.NO)
                             .showAndWait().ifPresent(buttonType -> {
                         if (buttonType == ButtonType.YES) {
-                            // TODO implement deleting transition from GUI
                             Main.automatas.transitions.remove(this);
                             this.start.inputTR.remove(this);
 
@@ -71,7 +70,6 @@ public class Transitions {
                                 + this.name + "?", ButtonType.YES, ButtonType.NO)
                                 .showAndWait().ifPresent(buttonType -> {
                             if (buttonType == ButtonType.YES) {
-                                // TODO implement deleting transition from GUI
                                 Main.automatas.transitions.remove(this);
                                 this.start.outputTR.remove(this);
                                 this.end.inputTR.remove(this);
