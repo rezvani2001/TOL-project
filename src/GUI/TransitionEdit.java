@@ -1,6 +1,7 @@
 package GUI;
 
 import javafx.collections.FXCollections;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
@@ -29,7 +30,9 @@ public class TransitionEdit extends Stage {
 
     private void makeScene() {
         makeMainBody();
-        Scene scene = new Scene(this.mainPane, 800, 800);
+        Scene scene = new Scene(this.mainPane, 450, 300);
+        String cssFilePath = "GUI/CssFiles/TransitionEditPageStyle.css";
+        scene.getStylesheets().add(cssFilePath);
         this.setScene(scene);
         this.setResizable(false);
         this.initModality(Modality.APPLICATION_MODAL);
@@ -38,6 +41,7 @@ public class TransitionEdit extends Stage {
 
     private void makeMainBody() {
         this.mainPane = new VBox(10);
+        mainPane.setAlignment(Pos.CENTER);
         this.makeNamePart();
         this.makeStartStatePart();
         this.makeEndStatePart();
@@ -67,7 +71,6 @@ public class TransitionEdit extends Stage {
                 selectedTransition.end.inputTR.add(selectedTransition);
                 selectedTransition.start.outputTR.add(selectedTransition);
             }
-
 
 
             Draw.pane.getChildren().remove(selectedTransition.uiTR);
@@ -107,12 +110,14 @@ public class TransitionEdit extends Stage {
 
     private void addNewPart(Label titleLabel, TextField inputText) {
         HBox handler = new HBox(10);
+        handler.setAlignment(Pos.CENTER);
         handler.getChildren().addAll(titleLabel, inputText);
         this.mainPane.getChildren().add(handler);
     }
 
     private <T> void addNewPart(Label titleLabel, ComboBox<T> input) {
         HBox handler = new HBox(10);
+        handler.setAlignment(Pos.CENTER);
         handler.getChildren().addAll(titleLabel, input);
         this.mainPane.getChildren().add(handler);
     }

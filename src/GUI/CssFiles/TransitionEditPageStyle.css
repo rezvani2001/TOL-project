@@ -1,0 +1,50 @@
+.root {
+    -fx-background-color: #f1f1f1;
+}
+
+.button {
+    -fx-background-color: #d6e4f0;
+    -fx-border-color: #163172;
+    -fx-border-radius: 40px;
+    -fx-background-radius: 40px;
+    -fx-pref-width: 340px;
+    -fx-pref-height: 40px;
+    -fx-font-family: Tahoma;
+    -fx-font-size: 30px;
+    -fx-font-weight: bolder;
+}
+
+.button:hover {
+    -fx-background-color: #163172;
+    -fx-text-fill: white;
+    -fx-cursor: hand;
+}
+
+.label {
+    -fx-font-family: "Segoe UI Black";
+    -fx-font-size: 20px;
+    -fx-pref-width: 130px;
+}
+
+.combo-box {
+    -fx-pref-width: 200px;
+    -fx-background-radius: 15px;
+    -fx-border-radius: 15px;
+    -fx-border-color: black;
+    -fx-background-color: #fdb827;
+    -fx-font-family: Consolas;
+    -fx-font-size: 17px;
+    -fx-font-weight: bolder;
+}
+
+.text-field {
+    -fx-pref-width: 200px;
+    -fx-background-radius: 15px;
+    -fx-border-radius: 15px;
+    -fx-border-color: black;
+    -fx-background-color: #fdb827;
+    -fx-text-alignment: center;
+    -fx-alignment: center;
+    -fx-font-family: "Arial Black";
+    -fx-font-size: 15px;
+}
