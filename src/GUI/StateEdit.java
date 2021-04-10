@@ -16,9 +16,9 @@ import javafx.stage.Stage;
 import logic.processData.State;
 import logic.processData.Transitions;
 
-public class CircleEdit extends Stage {
+public class StateEdit extends Stage {
     // the clicked circle state and the main pane of this stage
-    private final State state;
+    private State state;
     private final VBox mainPane;
 
     // TextArea for centerXPart of this stage
@@ -36,11 +36,20 @@ public class CircleEdit extends Stage {
     // CheckBox for isInitial part of this stage
     CheckBox isInitialState;
 
-    public CircleEdit(State state) {
+    public StateEdit(String title) {
+        this.mainPane = new VBox(10);
+        this.makeScene();
+        this.setTitle(title);
+        this.setResizable(false);
+        this.initModality(Modality.APPLICATION_MODAL);
+        this.showAndWait();
+    }
+
+    public StateEdit(State state, String title) {
         this.state = state;
         this.mainPane = new VBox(10);
         this.makeScene();
-        this.setTitle(String.format("Edit State %s", this.state.name));
+        this.setTitle(title);
         this.setResizable(false);
         this.initModality(Modality.APPLICATION_MODAL);
         this.showAndWait();

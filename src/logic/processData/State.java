@@ -1,6 +1,6 @@
 package logic.processData;
 
-import GUI.CircleEdit;
+import GUI.StateEdit;
 import GUI.Draw;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
@@ -47,7 +47,8 @@ public class State {
 
         circlePane.setOnMouseClicked(event1 -> {
             if (event1.getButton() == MouseButton.PRIMARY) {
-                Platform.runLater(() -> new CircleEdit(this));
+                String title = String.format("Edit State %s", this.name);
+                Platform.runLater(() -> new StateEdit(this, title));
             } else if (event1.getButton() == MouseButton.SECONDARY) {
                 new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete state " + this.name + "?", ButtonType.YES, ButtonType.NO)
                         .showAndWait().ifPresent(buttonType -> {
