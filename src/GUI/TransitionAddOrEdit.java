@@ -3,10 +3,7 @@ package GUI;
 import javafx.collections.FXCollections;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -16,19 +13,23 @@ import logic.processData.State;
 import logic.processData.Transitions;
 
 public class TransitionAddOrEdit extends Stage {
-    private final Transitions selectedTransition;
+    private Transitions selectedTransition;
     private TextField inputName;
-    private ComboBox<State> statesForStart;
-    private ComboBox<State> statesForEnd;
-    private ComboBox<String> alphabets;
+    private ComboBox<State> statesForStartComboBox;
+    private ComboBox<State> statesForEndComboBox;
+    private ComboBox<String> alphabetsComboBox;
     private VBox mainPane;
 
-    public TransitionAddOrEdit(Transitions selectedTransition) {
-        this.selectedTransition = selectedTransition;
-        this.makeScene();
+    public TransitionAddOrEdit(String title) {
+        this.makeScene(title);
     }
 
-    private void makeScene() {
+    public TransitionAddOrEdit(String title, Transitions selectedTransition) {
+        this.selectedTransition = selectedTransition;
+        this.makeScene(title);
+    }
+
+    private void makeScene(String title) {
         makeMainBody();
         Scene scene = new Scene(this.mainPane, 450, 300);
         String cssFilePath = "GUI/CssFiles/TransitionEditPageStyle.css";
@@ -36,7 +37,7 @@ public class TransitionAddOrEdit extends Stage {
         this.setScene(scene);
         this.setResizable(false);
         this.initModality(Modality.APPLICATION_MODAL);
-        this.setTitle(String.format("Edit Transition %s", this.selectedTransition.name));
+        this.setTitle(title);
         this.show();
     }
 
@@ -51,62 +52,50 @@ public class TransitionAddOrEdit extends Stage {
     }
 
     private void makeApplyButton() {
-        Button applyButton = new Button("Apply");
-        applyButton.setOnMouseClicked(event -> {
-            selectedTransition.start.outputTR.remove(selectedTransition);
-            selectedTransition.end.inputTR.remove(selectedTransition);
-
-            this.selectedTransition.start = this.statesForStart.getValue();
-            this.selectedTransition.end = this.statesForEnd.getValue();
-            this.selectedTransition.label = this.alphabets.getValue();
-            this.selectedTransition.name = this.inputName.getText();
-
-            if (selectedTransition.start == selectedTransition.end) {
-                selectedTransition.isLoop = true;
-
-                selectedTransition.start.inputTR.add(selectedTransition);
-
-            } else {
-                selectedTransition.isLoop = false;
-
-                selectedTransition.end.inputTR.add(selectedTransition);
-                selectedTransition.start.outputTR.add(selectedTransition);
-            }
-
-
-            Draw.pane.getChildren().remove(selectedTransition.uiTR);
-            selectedTransition.transitionPane();
-
+        Button button = new Button();
+        button.setText(this.selectedTransition == null ? "Add" : "Apply");
+        button.setOnMouseClicked(event -> {
+            if (this.selectedTransition != null)
+                this.buttonActionForEditMode();
+            else
+                this.buttonActionForAddMode();
             this.close();
         });
-        this.mainPane.getChildren().add(applyButton);
+        this.mainPane.getChildren().add(button);
     }
 
     private void makeNamePart() {
         Label nameLabel = new Label("Name :");
-        this.inputName = new TextField(this.selectedTransition.name);
+        if (this.selectedTransition != null)
+            this.inputName = new TextField(this.selectedTransition.name);
+        else
+            this.inputName = new TextField();
         this.addNewPart(nameLabel, this.inputName);
     }
 
     private void makeTransitionLabelPart() {
         Label transitionLabel = new Label("Alphabet :");
-        this.alphabets = new ComboBox<>(FXCollections.observableArrayList(Main.automatas.alphabets));
-        this.alphabets.getSelectionModel().select(Main.automatas.alphabets.indexOf(this.selectedTransition.label));
-        this.addNewPart(transitionLabel, this.alphabets);
+        if (Main.automatas.alphabets != null)
+            this.alphabetsComboBox = new ComboBox<>(FXCollections.observableArrayList(Main.automatas.alphabets));
+        if (this.selectedTransition != null)
+            this.alphabetsComboBox.getSelectionModel().select(Main.automatas.alphabets.indexOf(this.selectedTransition.label));
+        this.addNewPart(transitionLabel, this.alphabetsComboBox);
     }
 
     private void makeStartStatePart() {
         Label transitionStartPoint = new Label("From :");
-        this.statesForStart = new ComboBox<>(FXCollections.observableArrayList(Main.automatas.states));
-        this.statesForStart.getSelectionModel().select(Main.automatas.states.indexOf(this.selectedTransition.start));
-        this.addNewPart(transitionStartPoint, this.statesForStart);
+        this.statesForStartComboBox = new ComboBox<>(FXCollections.observableArrayList(Main.automatas.states));
+        if (this.selectedTransition != null)
+            this.statesForStartComboBox.getSelectionModel().select(Main.automatas.states.indexOf(this.selectedTransition.start));
+        this.addNewPart(transitionStartPoint, this.statesForStartComboBox);
     }
 
     private void makeEndStatePart() {
         Label transitionEndPoint = new Label("To :");
-        this.statesForEnd = new ComboBox<>(FXCollections.observableArrayList(Main.automatas.states));
-        this.statesForEnd.getSelectionModel().select(Main.automatas.states.indexOf(this.selectedTransition.end));
-        this.addNewPart(transitionEndPoint, this.statesForEnd);
+        this.statesForEndComboBox = new ComboBox<>(FXCollections.observableArrayList(Main.automatas.states));
+        if (this.selectedTransition != null)
+            this.statesForEndComboBox.getSelectionModel().select(Main.automatas.states.indexOf(this.selectedTransition.end));
+        this.addNewPart(transitionEndPoint, this.statesForEndComboBox);
     }
 
     private void addNewPart(Label titleLabel, TextField inputText) {
@@ -121,5 +110,34 @@ public class TransitionAddOrEdit extends Stage {
         handler.setAlignment(Pos.CENTER);
         handler.getChildren().addAll(titleLabel, input);
         this.mainPane.getChildren().add(handler);
+    }
+
+    private void buttonActionForEditMode() {
+        selectedTransition.start.outputTR.remove(selectedTransition);
+        selectedTransition.end.inputTR.remove(selectedTransition);
+
+        this.selectedTransition.start = this.statesForStartComboBox.getValue();
+        this.selectedTransition.end = this.statesForEndComboBox.getValue();
+        this.selectedTransition.label = this.alphabetsComboBox.getValue();
+        this.selectedTransition.name = this.inputName.getText();
+
+        if (selectedTransition.start == selectedTransition.end) {
+            selectedTransition.isLoop = true;
+
+            selectedTransition.start.inputTR.add(selectedTransition);
+
+        } else {
+            selectedTransition.isLoop = false;
+
+            selectedTransition.end.inputTR.add(selectedTransition);
+            selectedTransition.start.outputTR.add(selectedTransition);
+        }
+
+        Draw.pane.getChildren().remove(selectedTransition.uiTR);
+        selectedTransition.transitionPane();
+    }
+
+    private void buttonActionForAddMode() {
+
     }
 }

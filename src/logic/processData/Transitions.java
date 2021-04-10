@@ -33,7 +33,7 @@ public class Transitions {
 
             transitionPane.setOnMouseClicked(event -> Platform.runLater(() -> {
                 if (event.getButton() == MouseButton.PRIMARY)
-                    new TransitionAddOrEdit(this);
+                    new TransitionAddOrEdit(String.format("Edit Transition %s", this.name), this);
                 else if (event.getButton() == MouseButton.SECONDARY) {
                     new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete transition " +
                             this.name + "?", ButtonType.YES, ButtonType.NO)
@@ -64,7 +64,7 @@ public class Transitions {
             transitionPane.getChildren().get(0).setOnMouseClicked(event -> {
                 Platform.runLater(() -> {
                     if (event.getButton() == MouseButton.PRIMARY)
-                        new TransitionAddOrEdit(this);
+                        new TransitionAddOrEdit(String.format("Edit Transition %s", this.name), this);
                     else if (event.getButton() == MouseButton.SECONDARY) {
                         new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete transition "
                                 + this.name + "?", ButtonType.YES, ButtonType.NO)
