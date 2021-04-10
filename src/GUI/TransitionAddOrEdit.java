@@ -138,6 +138,19 @@ public class TransitionAddOrEdit extends Stage {
     }
 
     private void buttonActionForAddMode() {
+        Transitions transition = new Transitions();
+        transition.start = this.statesForStartComboBox.getValue();
+        transition.end = this.statesForEndComboBox.getValue();
+        transition.name = this.inputName.getText();
+        transition.isLoop = transition.start == transition.end;
+        transition.label = "a";
+        // TODO restore "a" with a alphabet from existing alphabets
 
+        Main.automatas.transitions.add(transition);
+
+        transition.start.outputTR.add(transition);
+        transition.end.inputTR.add(transition);
+
+        transition.transitionPane();
     }
 }

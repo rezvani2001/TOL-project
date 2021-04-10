@@ -10,6 +10,7 @@ import javafx.stage.FileChooser;
 import logic.*;
 import javafx.application.Application;
 import javafx.stage.Stage;
+import logic.processData.Automatas;
 import logic.processData.State;
 import logic.processData.Transitions;
 
@@ -23,6 +24,7 @@ public class Draw extends Application {
     @Override
     public void start(Stage primaryStage) {
 
+        Main.automatas = new Automatas("new");
         Stage stage = new Stage();
         BorderPane borderPane = new BorderPane();
 

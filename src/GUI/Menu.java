@@ -53,7 +53,7 @@ public class Menu extends Stage {
         Button addNewTransition = new Button("Add Transition");
         addNewTransition.setOnMouseClicked(event -> {
             String title = "Add Transition";
-//            new TransitionAddOrEdit(title);
+            new TransitionAddOrEdit(title);
         });
         this.mainPane.getChildren().add(addNewTransition);
     }

@@ -10,6 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import logic.Main;
 import logic.processData.State;
 import logic.processData.Transitions;
 
@@ -187,8 +188,11 @@ public class StateAddOrEdit extends Stage {
         } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "State added successfully!", ButtonType.OK);
             alert.showAndWait();
-            this.state = new State(this.isFinalState.isSelected(), this.isInitialState.isSelected(), this.inputName.getText(), Double.parseDouble(this.inputCenterX.getText()), Double.parseDouble(this.inputCenterY.getText()));
-            // TODO change the ui here and add the new state to UI use this.state to have the state information!
+            this.state = new State(this.isFinalState.isSelected(), this.isInitialState.isSelected(),
+                    this.inputName.getText(), Double.parseDouble(this.inputCenterX.getText()), Double.parseDouble(this.inputCenterY.getText()));
+
+            Main.automatas.states.add(this.state);
+            Draw.pane.getChildren().add(this.state.statePane());
             this.close();
             Menu.getStage().close();
         }
