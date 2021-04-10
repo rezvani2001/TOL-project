@@ -35,7 +35,6 @@ public class Draw extends Application {
 
         AtomicBoolean inputIsOpen = new AtomicBoolean(false);
 
-        buttonBox.getChildren().addAll(selectInput);
         borderPane.setTop(buttonBox);
 
         FileChooser filePath = new FileChooser();
@@ -98,6 +97,10 @@ public class Draw extends Application {
                 stage.requestFocus();
             }
         });
+
+        Button menuButton = new Button("Menu");
+        menuButton.setOnMouseClicked(event -> new Menu(selectInput));
+        buttonBox.getChildren().addAll(menuButton);
 
         String cssFilePath = "GUI/CssFiles/MainPageStyle.css";
         scene.getStylesheets().add(cssFilePath);
