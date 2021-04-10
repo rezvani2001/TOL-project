@@ -15,7 +15,7 @@ import logic.Main;
 import logic.processData.State;
 import logic.processData.Transitions;
 
-public class TransitionEdit extends Stage {
+public class TransitionAddOrEdit extends Stage {
     private final Transitions selectedTransition;
     private TextField inputName;
     private ComboBox<State> statesForStart;
@@ -23,7 +23,7 @@ public class TransitionEdit extends Stage {
     private ComboBox<String> alphabets;
     private VBox mainPane;
 
-    public TransitionEdit(Transitions selectedTransition) {
+    public TransitionAddOrEdit(Transitions selectedTransition) {
         this.selectedTransition = selectedTransition;
         this.makeScene();
     }

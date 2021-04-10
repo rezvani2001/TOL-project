@@ -13,7 +13,7 @@ import javafx.stage.Stage;
 import logic.processData.State;
 import logic.processData.Transitions;
 
-public class StateEdit extends Stage {
+public class StateAddOrEdit extends Stage {
     // the clicked circle state and the main pane of this stage
     private State state;
     private final VBox mainPane;
@@ -33,7 +33,7 @@ public class StateEdit extends Stage {
     // CheckBox for isInitial part of this stage
     CheckBox isInitialState;
 
-    public StateEdit(String title) {
+    public StateAddOrEdit(String title) {
         this.mainPane = new VBox(10);
         this.makeScene();
         this.setTitle(title);
@@ -42,7 +42,7 @@ public class StateEdit extends Stage {
         this.showAndWait();
     }
 
-    public StateEdit(State state, String title) {
+    public StateAddOrEdit(State state, String title) {
         this.state = state;
         this.mainPane = new VBox(10);
         this.makeScene();

@@ -44,7 +44,7 @@ public class Menu extends Stage {
         Button addNewState = new Button("Add State");
         addNewState.setOnMouseClicked(event -> {
             String title = "Add New State";
-            new StateEdit(title);
+            new StateAddOrEdit(title);
         });
         this.mainPane.getChildren().add(addNewState);
     }

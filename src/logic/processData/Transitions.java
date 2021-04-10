@@ -3,7 +3,7 @@ package logic.processData;
 import GUI.Draw;
 import GUI.Shapes.ArrowToItSelf;
 import GUI.Shapes.RegularArrow;
-import GUI.TransitionEdit;
+import GUI.TransitionAddOrEdit;
 import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
@@ -33,7 +33,7 @@ public class Transitions {
 
             transitionPane.setOnMouseClicked(event -> Platform.runLater(() -> {
                 if (event.getButton() == MouseButton.PRIMARY)
-                    new TransitionEdit(this);
+                    new TransitionAddOrEdit(this);
                 else if (event.getButton() == MouseButton.SECONDARY) {
                     new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete transition " +
                             this.name + "?", ButtonType.YES, ButtonType.NO)
@@ -64,7 +64,7 @@ public class Transitions {
             transitionPane.getChildren().get(0).setOnMouseClicked(event -> {
                 Platform.runLater(() -> {
                     if (event.getButton() == MouseButton.PRIMARY)
-                        new TransitionEdit(this);
+                        new TransitionAddOrEdit(this);
                     else if (event.getButton() == MouseButton.SECONDARY) {
                         new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete transition "
                                 + this.name + "?", ButtonType.YES, ButtonType.NO)
