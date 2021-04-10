@@ -11,10 +11,16 @@ import javafx.scene.input.MouseButton;
 import javafx.scene.layout.AnchorPane;
 import logic.Main;
 
+import java.util.ArrayList;
+import java.util.List;
+
+
 public class Transitions {
     public String name;
 
     public String label;
+
+    public List<String> alphabet = new ArrayList();
 
     public State start;
     public State end;
@@ -26,6 +32,19 @@ public class Transitions {
     public void transitionPane() {
         AnchorPane transitionPane;
 
+        StringBuilder stringBuilder = new StringBuilder();
+        int i = 0;
+        for (String alphabet : alphabet){
+            if (i == 0) {
+                stringBuilder.append(alphabet);
+                i++;
+            }
+            else {
+                stringBuilder.append("," + alphabet);
+            }
+        }
+
+        label = stringBuilder.toString();
 
         if (this.isLoop) {
             transitionPane = new ArrowToItSelf(this.start.centerX,

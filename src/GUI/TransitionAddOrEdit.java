@@ -12,6 +12,8 @@ import logic.Main;
 import logic.processData.State;
 import logic.processData.Transitions;
 
+import java.util.ArrayList;
+
 public class TransitionAddOrEdit extends Stage {
     private Transitions selectedTransition;
     private TextField inputName;
@@ -143,7 +145,8 @@ public class TransitionAddOrEdit extends Stage {
         transition.end = this.statesForEndComboBox.getValue();
         transition.name = this.inputName.getText();
         transition.isLoop = transition.start == transition.end;
-        transition.label = "a";
+        transition.alphabet = new ArrayList<String>();
+        transition.alphabet.add(this.alphabetsComboBox.getValue());
         // TODO restore "a" with a alphabet from existing alphabets
 
         Main.automatas.transitions.add(transition);

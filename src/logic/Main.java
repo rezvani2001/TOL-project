@@ -10,6 +10,7 @@ import logic.readXML.States.MainState;
 import logic.readXML.Transitions.MainTransition;
 
 import java.io.File;
+import java.util.Arrays;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Unmarshaller;
@@ -68,6 +69,7 @@ public class Main {
 
             newTransition.name = transition.name;
             newTransition.label = transition.label;
+            newTransition.alphabet = Arrays.asList(transition.label.split(","));
 
             if (transition.source.equals(transition.destination)) {
                 newTransition.isLoop = true;
