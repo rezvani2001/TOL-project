@@ -5,10 +5,7 @@ import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -66,15 +63,18 @@ public class StateEdit extends Stage {
     }
 
     private void makeSaveButton() {
-        Button saveButton = new Button("Apply");
+        Button saveButton = new Button();
+        if (this.state == null)
+            saveButton.setText("Add");
+        else
+            saveButton.setText("Apply");
         VBox.setMargin(saveButton, new Insets(20, 0, 0, 0));
         saveButton.setOnMouseClicked(event -> {
             if (this.state != null) {
                 this.buttonActionForEditMode();
             } else {
-
+                this.buttonActionForAddMode();
             }
-            this.close();
         });
         this.mainPane.getChildren().add(saveButton);
     }
@@ -89,34 +89,45 @@ public class StateEdit extends Stage {
 
     private void makeCenterX() {
         Label titleCenterX = new Label("CenterX :");
-        this.inputCenterX = new TextField(String.valueOf((int) this.state.centerX));
+        if (this.state != null)
+            this.inputCenterX = new TextField(String.valueOf((int) this.state.centerX));
+        else
+            this.inputCenterX = new TextField();
         this.inputCenterX.setAccessibleText("number field");
         this.mainPane.getChildren().add(this.addNewPart(titleCenterX, this.inputCenterX));
     }
 
     private void makeCenterY() {
         Label titleCenterY = new Label("CenterY :");
-        this.inputCenterY = new TextField(String.valueOf((int) this.state.centerY));
+        if (this.state != null)
+            this.inputCenterY = new TextField(String.valueOf((int) this.state.centerY));
+        else
+            this.inputCenterY = new TextField();
         this.inputCenterY.setAccessibleText("number field");
         this.mainPane.getChildren().add(this.addNewPart(titleCenterY, this.inputCenterY));
     }
 
     private void makeName() {
         Label titleName = new Label("Name :");
-        this.inputName = new TextField(this.state.name);
+        if (this.state != null)
+            this.inputName = new TextField(this.state.name);
+        else
+            this.inputName = new TextField();
         this.inputName.setAccessibleText("text field");
         this.mainPane.getChildren().add(this.addNewPart(titleName, this.inputName));
     }
 
     private void makeIsFinal() {
         this.isFinalState = new CheckBox("IsFinal");
-        this.isFinalState.setSelected(this.state.isFinal);
+        if (this.state != null)
+            this.isFinalState.setSelected(this.state.isFinal);
         this.mainPane.getChildren().add(this.addNewPart(this.isFinalState));
     }
 
     private void makeIsInitial() {
         this.isInitialState = new CheckBox("IsInitial");
-        this.isInitialState.setSelected(this.state.isInitial);
+        if (this.state != null)
+            this.isInitialState.setSelected(this.state.isInitial);
         this.mainPane.getChildren().add(this.addNewPart(this.isInitialState));
     }
 
@@ -163,10 +174,29 @@ public class StateEdit extends Stage {
                 Draw.pane.getChildren().add(state.statePane());
             });
         }).start();
+        this.close();
     }
 
     private void buttonActionForAddMode() {
+        if (this.inputCenterX.getText().length() == 0) {
+            makeAlert("Please enter X value!");
+        } else if (this.inputCenterY.getText().length() == 0) {
+            makeAlert("Please enter Y value!");
+        } else if (this.inputName.getText().length() == 0) {
+            makeAlert("Please enter name!");
+        } else {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "State added successfully!", ButtonType.OK);
+            alert.showAndWait();
+            this.state = new State(this.isFinalState.isSelected(), this.isInitialState.isSelected(), this.inputName.getText(), Double.parseDouble(this.inputCenterX.getText()), Double.parseDouble(this.inputCenterY.getText()));
+            // TODO change the ui here and add the new state to UI use this.state to have the state information!
+            this.close();
+            Menu.getStage().close();
+        }
+    }
 
+    private void makeAlert(String text) {
+        Alert alert = new Alert(Alert.AlertType.ERROR, text, ButtonType.OK);
+        alert.showAndWait();
     }
 
     private HBox addNewPart(CheckBox checkBox) {

@@ -9,7 +9,7 @@ import javafx.stage.Stage;
 
 public class Menu extends Stage {
     private VBox mainPane;
-    private Stage mainPage;
+    private final Stage mainPage;
     private static Stage thisStage;
 
     public Menu(Button selectFileButton, Stage mainPage) {
