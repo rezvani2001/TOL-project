@@ -2,7 +2,7 @@
     -fx-background-color: #a6fff2;
 }
 
-#SelectInputFileButton {
+.button {
     -fx-background-color: #74f9ff;
     -fx-border-color: #4781B5;
     -fx-border-radius: 10px;

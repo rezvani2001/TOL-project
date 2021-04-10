@@ -99,7 +99,7 @@ public class Draw extends Application {
         });
 
         Button menuButton = new Button("Menu");
-        menuButton.setOnMouseClicked(event -> new Menu(selectInput));
+        menuButton.setOnMouseClicked(event -> new Menu(selectInput, primaryStage));
         buttonBox.getChildren().addAll(menuButton);
 
         String cssFilePath = "GUI/CssFiles/MainPageStyle.css";
