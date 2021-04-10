@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 public class Menu extends Stage {
     private VBox mainPane;
     private Stage mainPage;
+    private static Stage thisStage;
 
     public Menu(Button selectFileButton, Stage mainPage) {
         this.mainPage = mainPage;
@@ -30,6 +31,7 @@ public class Menu extends Stage {
         this.setScene(scene);
         this.setTitle("Menu");
         this.initModality(Modality.APPLICATION_MODAL);
+        thisStage = this;
         this.show();
     }
 
@@ -68,5 +70,9 @@ public class Menu extends Stage {
 
     private void addButtonToMenu(Button button) {
         this.mainPane.getChildren().add(button);
+    }
+
+    public static Stage getStage() {
+        return thisStage;
     }
 }

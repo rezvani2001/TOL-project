@@ -69,34 +69,11 @@ public class StateEdit extends Stage {
         Button saveButton = new Button("Apply");
         VBox.setMargin(saveButton, new Insets(20, 0, 0, 0));
         saveButton.setOnMouseClicked(event -> {
+            if (this.state != null) {
+                this.buttonActionForEditMode();
+            } else {
 
-            this.state.isInitial = this.isInitialState.isSelected();
-            this.state.isFinal = this.isFinalState.isSelected();
-            this.state.centerX = Double.parseDouble(this.inputCenterX.getText());
-            this.state.centerY = Double.parseDouble(this.inputCenterY.getText());
-            this.state.name = this.inputName.getText();
-
-            new Thread(() -> {
-                for (Transitions transitions : state.inputTR) {
-                    Platform.runLater(() -> {
-                        Draw.pane.getChildren().remove(transitions.uiTR);
-                        transitions.transitionPane();
-                    });
-                }
-
-                for (Transitions transitions : state.outputTR) {
-                    Platform.runLater(() -> {
-                        Draw.pane.getChildren().remove(transitions.uiTR);
-                        transitions.transitionPane();
-                    });
-                }
-
-                Platform.runLater(() -> {
-                    Draw.pane.getChildren().remove(state.UIState);
-                    Draw.pane.getChildren().add(state.statePane());
-                });
-            }).start();
-
+            }
             this.close();
         });
         this.mainPane.getChildren().add(saveButton);
@@ -146,7 +123,7 @@ public class StateEdit extends Stage {
     private HBox addNewPart(Label label, TextField textInput) {
         HBox pane = new HBox(10);
 
-        if (textInput.getAccessibleText().equals("number field")){
+        if (textInput.getAccessibleText().equals("number field")) {
             textInput.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
                 if (!newValue.matches("\\d*")) {
                     textInput.setText(newValue.replaceAll("[^\\d]", ""));
@@ -157,6 +134,39 @@ public class StateEdit extends Stage {
         pane.getChildren().addAll(label, textInput);
         pane.setAlignment(Pos.CENTER);
         return pane;
+    }
+
+    private void buttonActionForEditMode() {
+        this.state.isInitial = this.isInitialState.isSelected();
+        this.state.isFinal = this.isFinalState.isSelected();
+        this.state.centerX = Double.parseDouble(this.inputCenterX.getText());
+        this.state.centerY = Double.parseDouble(this.inputCenterY.getText());
+        this.state.name = this.inputName.getText();
+
+        new Thread(() -> {
+            for (Transitions transitions : state.inputTR) {
+                Platform.runLater(() -> {
+                    Draw.pane.getChildren().remove(transitions.uiTR);
+                    transitions.transitionPane();
+                });
+            }
+
+            for (Transitions transitions : state.outputTR) {
+                Platform.runLater(() -> {
+                    Draw.pane.getChildren().remove(transitions.uiTR);
+                    transitions.transitionPane();
+                });
+            }
+
+            Platform.runLater(() -> {
+                Draw.pane.getChildren().remove(state.UIState);
+                Draw.pane.getChildren().add(state.statePane());
+            });
+        }).start();
+    }
+
+    private void buttonActionForAddMode() {
+
     }
 
     private HBox addNewPart(CheckBox checkBox) {

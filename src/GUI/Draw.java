@@ -88,6 +88,8 @@ public class Draw extends Application {
                         });
                         thread.start();
 
+                        Menu.getStage().close();
+
                     } else {
                         new Alert(Alert.AlertType.ERROR, "this file format is not supported").showAndWait();
                     }
