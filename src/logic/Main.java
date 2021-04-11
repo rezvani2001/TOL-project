@@ -51,8 +51,10 @@ public class Main {
             newState.centerX = state.positionX;
             newState.centerY = state.positionY;
 
-            if (state.name.equals(automata.States.initialState.name))
+            if (state.name.equals(automata.States.initialState.name)){
                 newState.isInitial = true;
+                destiny.initial = newState;
+            }
 
             for (MainFinalState finalState : automata.States.FinalStates.finalState) {
                 if (finalState.name.equals(newState.name)) {

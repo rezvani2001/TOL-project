@@ -155,6 +155,15 @@ public class StateAddOrEdit extends Stage {
         this.state.centerY = Double.parseDouble(this.inputCenterY.getText());
         this.state.name = this.inputName.getText();
 
+        if (isInitialState.isSelected()){
+            if (Main.automatas.initial != null){
+                Main.automatas.initial.isInitial = false;
+                Draw.pane.getChildren().remove(Main.automatas.initial.UIState);
+                Draw.pane.getChildren().add(Main.automatas.initial.statePane());
+            }
+            Main.automatas.initial = this.state;
+        }
+
         new Thread(() -> {
             for (Transitions transitions : state.inputTR) {
                 Platform.runLater(() -> {
@@ -188,8 +197,19 @@ public class StateAddOrEdit extends Stage {
         } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "State added successfully!", ButtonType.OK);
             alert.showAndWait();
+
             this.state = new State(this.isFinalState.isSelected(), this.isInitialState.isSelected(),
-                    this.inputName.getText(), Double.parseDouble(this.inputCenterX.getText()), Double.parseDouble(this.inputCenterY.getText()));
+                    this.inputName.getText(), Double.parseDouble(this.inputCenterX.getText()),
+                    Double.parseDouble(this.inputCenterY.getText()));
+
+            if (isInitialState.isSelected()){
+                if (Main.automatas.initial != null){
+                    Main.automatas.initial.isInitial = false;
+                    Draw.pane.getChildren().remove(Main.automatas.initial.UIState);
+                    Draw.pane.getChildren().add(Main.automatas.initial.statePane());
+                }
+                Main.automatas.initial = this.state;
+            }
 
             Main.automatas.states.add(this.state);
             Draw.pane.getChildren().add(this.state.statePane());

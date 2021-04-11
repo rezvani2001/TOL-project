@@ -14,7 +14,9 @@ import logic.processData.Automatas;
 import logic.processData.State;
 import logic.processData.Transitions;
 
-import java.io.File;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 
@@ -92,6 +94,7 @@ public class Draw extends Application {
 
                         Menu.getStage().close();
 
+                        save();
                     } else {
                         new Alert(Alert.AlertType.ERROR, "this file format is not supported").showAndWait();
                     }
@@ -112,6 +115,65 @@ public class Draw extends Application {
         primaryStage.setMaximized(true);
         primaryStage.setResizable(true);
         primaryStage.show();
+    }
+
+
+    public static void save() {
+        new Thread(() -> {
+            try {
+                FileWriter file = new FileWriter("output.xml");
+
+                BufferedWriter buffer = new BufferedWriter(file);
+
+                buffer.write("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+                buffer.write("\t<Automata type=\"" + Main.automatas.type + "\">\n");
+                /*
+                alphabets
+                 */
+                buffer.write("\t\t<Alphabets numberOfAlphabets=\"" + Main.automatas.alphabets.size() + "\">\n");
+                for (String alphabet : Main.automatas.alphabets) {
+                    buffer.write("\t\t\t<alphabet letter=\"" + alphabet + "\"/>\n");
+                }
+                buffer.write("\t\t</Alphabets>\n");
+                /*
+                states
+                 */
+                buffer.write("\t\t<States numberOfStates=\"" + Main.automatas.states.size() + "\">\n");
+                List<State> finals = new ArrayList<>();
+                for (State state : Main.automatas.states) {
+                    buffer.write("\t\t\t<state name=\"" + state.name + "\" positionX=\"" + state.centerX +
+                            "\" positionY=\"" + state.centerY + "\"/>\n");
+                    if (state.isFinal) finals.add(state);
+                }
+
+                buffer.write("\t\t\t<initialState name=\"" + Main.automatas.initial+ "\"/>\n");
+                buffer.write("\t\t\t<FinalStates numberOfFinalStates=\"" + finals.size() + "\">\n");
+                for (State finalState : finals){
+                    buffer.write("\t\t\t\t<finalState name=\"" + finalState.name + "\"/>\n");
+                }
+                buffer.write("\t\t\t</FinalStates>\n");
+
+                buffer.write("\t\t</States>\n");
+
+                /*
+                transitions
+                 */
+                buffer.write("\t\t<Transitions numberOfTrans=\"" + Main.automatas.transitions.size() + "\">\n");
+                for (Transitions transition : Main.automatas.transitions) {
+                    buffer.write("\t\t\t<transition name=\"" + transition.name + "\" source=\"" +
+                            transition.start + "\" destination=\"" + transition.end + "\" label=\"" +
+                            transition.label + "\"/>\n");
+                }
+                buffer.write("\t\t</Transitions>\n");
+
+                buffer.write("\t</Automata>\n");
+                buffer.flush();
+                file.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }).start();
+
     }
 }
 
