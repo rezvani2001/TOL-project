@@ -147,7 +147,6 @@ public class TransitionAddOrEdit extends Stage {
         transition.isLoop = transition.start == transition.end;
         transition.alphabet = new ArrayList<>();
         transition.alphabet.add(this.alphabetsComboBox.getValue());
-        // TODO restore "a" with a alphabet from existing alphabets
 
         Main.automatas.transitions.add(transition);
 
