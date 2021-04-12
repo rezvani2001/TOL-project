@@ -40,7 +40,7 @@ public class Transitions {
                 i++;
             }
             else {
-                stringBuilder.append("," + alphabet);
+                stringBuilder.append(",").append(alphabet);
             }
         }
 
