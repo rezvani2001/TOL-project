@@ -155,8 +155,8 @@ public class StateAddOrEdit extends Stage {
         this.state.centerY = Double.parseDouble(this.inputCenterY.getText());
         this.state.name = this.inputName.getText();
 
-        if (isInitialState.isSelected()){
-            if (Main.automatas.initial != null){
+        if (isInitialState.isSelected()) {
+            if (Main.automatas.initial != null) {
                 Main.automatas.initial.isInitial = false;
                 Draw.pane.getChildren().remove(Main.automatas.initial.UIState);
                 Draw.pane.getChildren().add(Main.automatas.initial.statePane());
@@ -188,12 +188,12 @@ public class StateAddOrEdit extends Stage {
     }
 
     private void buttonActionForAddMode() {
-        if (this.inputCenterX.getText().length() == 0) {
+        if (this.inputName.getText().length() == 0) {
+            makeAlert("Please enter name!");
+        } else if (this.inputCenterX.getText().length() == 0) {
             makeAlert("Please enter X value!");
         } else if (this.inputCenterY.getText().length() == 0) {
             makeAlert("Please enter Y value!");
-        } else if (this.inputName.getText().length() == 0) {
-            makeAlert("Please enter name!");
         } else {
             Alert alert = new Alert(Alert.AlertType.INFORMATION, "State added successfully!", ButtonType.OK);
             alert.showAndWait();
@@ -202,8 +202,8 @@ public class StateAddOrEdit extends Stage {
                     this.inputName.getText(), Double.parseDouble(this.inputCenterX.getText()),
                     Double.parseDouble(this.inputCenterY.getText()));
 
-            if (isInitialState.isSelected()){
-                if (Main.automatas.initial != null){
+            if (isInitialState.isSelected()) {
+                if (Main.automatas.initial != null) {
                     Main.automatas.initial.isInitial = false;
                     Draw.pane.getChildren().remove(Main.automatas.initial.UIState);
                     Draw.pane.getChildren().add(Main.automatas.initial.statePane());
