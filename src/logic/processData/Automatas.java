@@ -10,6 +10,7 @@ public class Automatas {
     public List<String> alphabets;
 
     public List<State> states;
+    public State initial;
 
     public List<Transitions> transitions;
 
