@@ -20,7 +20,7 @@ enum StageMode {
 public class DeleteAlphabet extends Stage {
     private final VBox mainPain;
     private ComboBox<String> currentAlphabets;
-    private StageMode stageMode;
+    private final StageMode stageMode;
     private TextField alphabetNameInput;
 
     public DeleteAlphabet(StageMode stageMode) {
