@@ -21,3 +21,11 @@
     -fx-font-family: "Arial Black";
     -fx-font-size: 23px;
 }
+
+.text-field {
+    -fx-background-color: black;
+    -fx-text-fill: white;
+    -fx-alignment: center;
+    -fx-font-family: "Segoe UI Black";
+    -fx-font-size: 15px;
+}
