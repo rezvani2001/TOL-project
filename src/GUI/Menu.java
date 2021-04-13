@@ -2,6 +2,7 @@ package GUI;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -21,12 +22,13 @@ public class Menu extends Stage {
         this.mainPane = new VBox(20);
         this.mainPane.setAlignment(Pos.CENTER);
         this.addButtonToMenu(selectFileButton);
+        this.makeSaveButton();
         this.makeAddNewAlphabetButton();
         this.makeAddNewStateButton();
         this.makeAddNewTransitionButton();
         this.makeDeleteAlphabetButton();
         this.makeExitButton();
-        Scene scene = new Scene(this.mainPane, 300, 500);
+        Scene scene = new Scene(this.mainPane, 300, 545);
         scene.getStylesheets().add("GUI/CssFiles/MenuPageStyle.css");
         this.setScene(scene);
         this.setTitle("Menu");
@@ -41,6 +43,16 @@ public class Menu extends Stage {
             new DeleteAlphabet(StageMode.ADD);
         });
         this.mainPane.getChildren().add(addNewAlphabet);
+    }
+
+    private void makeSaveButton() {
+        Button saveButton = new Button("Save");
+        saveButton.setOnMouseClicked(event -> {
+            Draw.save();
+            this.close();
+            new Alert(Alert.AlertType.INFORMATION, "The file saved successfully in output.xml").showAndWait();
+        });
+        this.mainPane.getChildren().add(saveButton);
     }
 
     private void makeAddNewStateButton() {
