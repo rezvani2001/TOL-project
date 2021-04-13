@@ -1,0 +1,31 @@
+.root {
+    -fx-background-color: #ebe01e;
+}
+
+.button {
+    -fx-background-color: black;
+    -fx-text-fill: white;
+    -fx-font-family: "Segoe UI Black";
+    -fx-font-size: 17px;
+    -fx-pref-width: 200px;
+    -fx-border-radius: 20px;
+    -fx-background-radius: 20px;
+}
+
+.button:hover {
+    -fx-background-color: red;
+    -fx-text-fill: white;
+}
+
+.label {
+    -fx-font-family: "Arial Black";
+    -fx-font-size: 23px;
+}
+
+.text-field {
+    -fx-background-color: black;
+    -fx-text-fill: white;
+    -fx-alignment: center;
+    -fx-font-family: "Segoe UI Black";
+    -fx-font-size: 15px;
+}

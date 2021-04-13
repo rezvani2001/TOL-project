@@ -37,6 +37,9 @@ public class Menu extends Stage {
 
     private void makeAddNewAlphabetButton() {
         Button addNewAlphabet = new Button("Add Alphabet");
+        addNewAlphabet.setOnMouseClicked(event -> {
+            new DeleteAlphabet(StageMode.ADD);
+        });
         this.mainPane.getChildren().add(addNewAlphabet);
     }
 
@@ -61,7 +64,7 @@ public class Menu extends Stage {
     private void makeDeleteAlphabetButton() {
         Button deleteAlphabet = new Button("Delete Alphabet");
         deleteAlphabet.setOnMouseClicked(event -> {
-            new DeleteAlphabet();
+            new DeleteAlphabet(StageMode.DELETE);
         });
         this.mainPane.getChildren().add(deleteAlphabet);
     }
