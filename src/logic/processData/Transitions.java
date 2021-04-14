@@ -33,14 +33,20 @@ public class Transitions {
         AnchorPane transitionPane;
 
         StringBuilder stringBuilder = new StringBuilder();
-        int i = 0;
-        for (String alphabet : alphabet){
-            if (i == 0) {
-                stringBuilder.append(alphabet);
-                i++;
-            }
-            else {
-                stringBuilder.append(",").append(alphabet);
+
+        if (alphabet.size() == 0) {
+            stringBuilder.append((char) 955);
+        } else {
+            int i = 0;
+
+            for (String alphabet : alphabet){
+                if (i == 0) {
+                    stringBuilder.append(alphabet);
+                    i++;
+                }
+                else {
+                    stringBuilder.append(",").append(alphabet);
+                }
             }
         }
 

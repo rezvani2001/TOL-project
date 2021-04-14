@@ -18,6 +18,8 @@ public class Automatas {
         this.type = type;
 
         alphabets = new ArrayList<>();
+        alphabets.add(String.valueOf((char) 955));
+
         states = new ArrayList<>();
         transitions = new ArrayList<>();
     }

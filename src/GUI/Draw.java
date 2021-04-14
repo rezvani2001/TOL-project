@@ -130,8 +130,9 @@ public class Draw extends Application {
                 /*
                 alphabets
                  */
-                buffer.write("\t\t<Alphabets numberOfAlphabets=\"" + Main.automatas.alphabets.size() + "\">\n");
+                buffer.write("\t\t<Alphabets numberOfAlphabets=\"" + (Main.automatas.alphabets.size() - 1) + "\">\n");
                 for (String alphabet : Main.automatas.alphabets) {
+                    if (alphabet.equals(String.valueOf((char) 955))) continue;
                     buffer.write("\t\t\t<alphabet letter=\"" + alphabet + "\"/>\n");
                 }
                 buffer.write("\t\t</Alphabets>\n");
@@ -146,9 +147,9 @@ public class Draw extends Application {
                     if (state.isFinal) finals.add(state);
                 }
 
-                buffer.write("\t\t\t<initialState name=\"" + Main.automatas.initial+ "\"/>\n");
+                buffer.write("\t\t\t<initialState name=\"" + Main.automatas.initial + "\"/>\n");
                 buffer.write("\t\t\t<FinalStates numberOfFinalStates=\"" + finals.size() + "\">\n");
-                for (State finalState : finals){
+                for (State finalState : finals) {
                     buffer.write("\t\t\t\t<finalState name=\"" + finalState.name + "\"/>\n");
                 }
                 buffer.write("\t\t\t</FinalStates>\n");

@@ -120,7 +120,8 @@ public class TransitionAddOrEdit extends Stage {
 
         this.selectedTransition.start = this.statesForStartComboBox.getValue();
         this.selectedTransition.end = this.statesForEndComboBox.getValue();
-        this.selectedTransition.label = this.alphabetsComboBox.getValue();
+        this.selectedTransition.alphabet = new ArrayList<>();
+        this.selectedTransition.alphabet.add(this.alphabetsComboBox.getValue());
         this.selectedTransition.name = this.inputName.getText();
 
         if (selectedTransition.start == selectedTransition.end) {

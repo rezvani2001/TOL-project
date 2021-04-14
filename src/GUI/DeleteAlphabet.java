@@ -3,19 +3,19 @@ package GUI;
 import javafx.collections.FXCollections;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import logic.Main;
+import logic.processData.Transitions;
 
 enum StageMode {
     ADD, DELETE
 }
+
+
 
 public class DeleteAlphabet extends Stage {
     private final VBox mainPain;
@@ -67,8 +67,27 @@ public class DeleteAlphabet extends Stage {
         Button deleteButton = new Button(this.stageMode == StageMode.DELETE ? "DELETE" : "ADD");
         if (this.stageMode == StageMode.DELETE)
             deleteButton.setOnMouseClicked(event -> {
-                Main.automatas.alphabets.remove(this.currentAlphabets.getValue());
-                this.close();
+                if (this.currentAlphabets.getValue() == null) {
+                    new Alert(Alert.AlertType.ERROR, "please select a letter").showAndWait();
+                } else {
+                    if (this.currentAlphabets.getValue().equals(String.valueOf((char) 955))) {
+
+                        new Alert(Alert.AlertType.ERROR, "cant remove lambda word, " +
+                                "if you dont want it, dont use it in transitions").showAndWait();
+
+                    } else {
+                        Main.automatas.alphabets.remove(this.currentAlphabets.getValue());
+
+                        for (Transitions transition : Main.automatas.transitions) {
+                            if (transition.alphabet.contains(this.currentAlphabets.getValue())) {
+                                transition.alphabet.remove(this.currentAlphabets.getValue());
+                                Draw.pane.getChildren().remove(transition.uiTR);
+                                transition.transitionPane();
+                            }
+                        }
+                        this.close();
+                    }
+                }
             });
         else
             deleteButton.setOnMouseClicked(event -> {
