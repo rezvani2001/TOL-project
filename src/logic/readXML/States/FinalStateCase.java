@@ -2,6 +2,7 @@ package logic.readXML.States;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import java.util.ArrayList;
 import java.util.List;
 
 public class FinalStateCase {
@@ -10,5 +11,5 @@ public class FinalStateCase {
     public int numberOfFinalStates;
 
     @XmlElement
-    public List<MainFinalState> finalState;
+    public List<MainFinalState> finalState = new ArrayList<>();
 }

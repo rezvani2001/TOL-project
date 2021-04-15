@@ -13,20 +13,20 @@ public class Menu extends Stage {
     private final Stage mainPage;
     private static Stage thisStage;
 
-    public Menu(Button selectFileButton, Stage mainPage) {
+    public Menu(Stage mainPage) {
         this.mainPage = mainPage;
-        this.makeMainBodyAndShow(selectFileButton);
+        this.makeMainBodyAndShow();
     }
 
-    public void makeMainBodyAndShow(Button selectFileButton) {
+    public void makeMainBodyAndShow() {
         this.mainPane = new VBox(20);
         this.mainPane.setAlignment(Pos.CENTER);
-        this.addButtonToMenu(selectFileButton);
         this.makeSaveButton();
         this.makeAddNewAlphabetButton();
         this.makeAddNewStateButton();
         this.makeAddNewTransitionButton();
         this.makeDeleteAlphabetButton();
+        this.makeBackButton();
         this.makeExitButton();
         Scene scene = new Scene(this.mainPane, 300, 545);
         scene.getStylesheets().add("GUI/CssFiles/MenuPageStyle.css");
@@ -90,8 +90,16 @@ public class Menu extends Stage {
         this.mainPane.getChildren().add(exitButton);
     }
 
-    private void addButtonToMenu(Button button) {
-        this.mainPane.getChildren().add(button);
+    private void makeBackButton(){
+        Button back = new Button("back to start menu");
+        back.setOnAction(event -> {
+            Stage stage = new Stage();
+            Draw.startProcess(stage);
+            this.close();
+            this.mainPage.close();
+        });
+        this.mainPane.getChildren().add(back);
+
     }
 
     public static Stage getStage() {

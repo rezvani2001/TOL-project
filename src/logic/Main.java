@@ -20,7 +20,6 @@ public class Main {
     public static Automatas automatas;
 
 
-
     public static void main(File file) {
         Automata automata;
 
@@ -54,7 +53,7 @@ public class Main {
             newState.centerX = state.positionX;
             newState.centerY = state.positionY;
 
-            if (state.name.equals(automata.States.initialState.name)){
+            if (state.name.equals(automata.States.initialState.name)) {
                 newState.isInitial = true;
                 destiny.initial = newState;
             }
