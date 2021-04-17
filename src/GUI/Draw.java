@@ -63,7 +63,6 @@ public class Draw extends Application {
                     }
                     pane = new AnchorPane();
 
-                    BorderPane.setMargin(pane, new Insets(0, 20, 20, 20));
 
                     thread = new Thread(() -> {
                         for (State state : Main.automatas.states) {
@@ -143,7 +142,10 @@ public class Draw extends Application {
 
         borderPane.setCenter(pane);
         borderPane.setTop(buttonBox);
+        BorderPane.setMargin(buttonBox, new Insets(20, 20, 20, 20));
 
+        pane.setStyle("-fx-background-color: white");
+        BorderPane.setMargin(pane, new Insets(0, 20, 20, 20));
 
 
         Scene scene = new Scene(borderPane);
