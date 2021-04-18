@@ -114,7 +114,9 @@ public class Draw extends Application {
             buttonBox.getChildren().addAll(submit, back);
             textBox.getChildren().addAll(text, buttonBox);
 
-            primaryStage.setScene(new Scene(textBox, 300, 200));
+            Scene scene = new Scene(textBox, 350, 200);
+            scene.getStylesheets().add("GUI/CssFiles/AutomataTypeStyle.css");
+            primaryStage.setScene(scene);
         });
 
         Button exit = new Button("Exit");
