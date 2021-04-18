@@ -28,14 +28,13 @@ public class Draw extends Application {
         startProcess(primaryStage);
     }
 
-    public static void startProcess(Stage primaryStage){
+    public static void startProcess(Stage primaryStage) {
         pane = new AnchorPane();
-        pane.setId("WorkSpacePane");
 
         VBox box = new VBox(20);
         box.setAlignment(Pos.CENTER);
 
-        Button load = new Button("load a file");
+        Button load = new Button("Load A File");
         load.setId("SelectInputFileButton");
         load.setTooltip(new Tooltip("Select Input XML File"));
 
@@ -44,8 +43,6 @@ public class Draw extends Application {
 
             FileChooser filePath = new FileChooser();
             filePath.setTitle("select file");
-
-            pane.setId("WorkSpacePane");
 
             File selectedFile = filePath.showOpenDialog(stage);
 
@@ -82,7 +79,7 @@ public class Draw extends Application {
         });
 
 
-        Button newFA = new Button("make a new project");
+        Button newFA = new Button("Make A New Project");
         newFA.setOnAction(event -> {
             VBox textBox = new VBox(20);
             textBox.setAlignment(Pos.CENTER);
@@ -91,19 +88,19 @@ public class Draw extends Application {
             text.setAlignment(Pos.CENTER);
 
 
-            Label label = new Label("automata type");
+            Label label = new Label("Automata Type");
 
             TextField type = new TextField();
-            type.setPromptText("automata type");
+            type.setPromptText("Automata Type");
 
             text.getChildren().addAll(label, type);
 
             HBox buttonBox = new HBox(20);
             buttonBox.setAlignment(Pos.CENTER);
 
-            Button submit = new Button("submit");
+            Button submit = new Button("Submit");
             submit.setOnAction(event1 -> {
-                if (type.getText().equals("")) new Alert(Alert.AlertType.ERROR ,
+                if (type.getText().equals("")) new Alert(Alert.AlertType.ERROR,
                         "please enter automata type").showAndWait();
                 else {
                     Main.automatas = new Automatas(type.getText());
@@ -111,7 +108,7 @@ public class Draw extends Application {
                 }
             });
 
-            Button back = new Button("back");
+            Button back = new Button("Back");
             back.setOnAction(event1 -> startProcess(primaryStage));
 
             buttonBox.getChildren().addAll(submit, back);
@@ -125,16 +122,16 @@ public class Draw extends Application {
 
         box.getChildren().addAll(load, newFA, exit);
 
-        primaryStage.setTitle("welcome");
-        primaryStage.setScene(new Scene(box, 200, 300));
+        primaryStage.setTitle("Welcome");
+        Scene scene = new Scene(box, 300, 350);
+        scene.getStylesheets().add("GUI/CssFiles/StartPageStyle.css");
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 
 
-
     public static void mainPage(Stage primaryStage) {
         BorderPane borderPane = new BorderPane();
-
 
 
         VBox buttonBox = new VBox(10);
@@ -144,13 +141,13 @@ public class Draw extends Application {
         borderPane.setTop(buttonBox);
         BorderPane.setMargin(buttonBox, new Insets(20, 20, 20, 20));
 
-        pane.setStyle("-fx-background-color: white");
+//        pane.setStyle("-fx-background-color: white");
+        pane.setId("WorkSpacePane");
         BorderPane.setMargin(pane, new Insets(0, 20, 20, 20));
 
 
         Scene scene = new Scene(borderPane);
         primaryStage.setScene(scene);
-
 
 
         Button menuButton = new Button("Menu");
@@ -164,7 +161,6 @@ public class Draw extends Application {
         primaryStage.setResizable(true);
         primaryStage.show();
     }
-
 
 
     public static void save() {
