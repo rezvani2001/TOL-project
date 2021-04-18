@@ -43,13 +43,11 @@ public class Draw extends Application {
 
             FileChooser filePath = new FileChooser();
             filePath.setTitle("select file");
+            filePath.getExtensionFilters().add(new FileChooser.ExtensionFilter("just xml files", "*.xml"));
 
             File selectedFile = filePath.showOpenDialog(stage);
-
-
-            if (selectedFile != null && selectedFile.getPath().contains(".xml")) {
-
-                if (selectedFile.getPath().contains(".xml")) {
+            stage.setOnCloseRequest(event1 -> {
+                if (selectedFile != null) {
                     Thread thread = new Thread(() -> Main.main(selectedFile));
 
                     thread.start();
@@ -73,9 +71,7 @@ public class Draw extends Application {
                     thread.start();
                     mainPage(primaryStage);
                 }
-            } else if (selectedFile != null && !selectedFile.getPath().contains(".xml")) {
-                new Alert(Alert.AlertType.ERROR, "this file format is not supported").showAndWait();
-            }
+            });
         });
 
 
@@ -165,10 +161,10 @@ public class Draw extends Application {
     }
 
 
-    public static void save() {
+    public static void save(File selectedFile) {
         new Thread(() -> {
             try {
-                FileWriter file = new FileWriter("output.xml");
+                FileWriter file = new FileWriter(selectedFile == null ? new File("output.xml") : selectedFile);
 
                 BufferedWriter buffer = new BufferedWriter(file);
 
@@ -217,6 +213,7 @@ public class Draw extends Application {
                 buffer.write("\t</Automata>\n");
                 buffer.flush();
                 file.close();
+                new Alert(Alert.AlertType.INFORMATION, "Saved Successfully").showAndWait();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -224,5 +221,3 @@ public class Draw extends Application {
 
     }
 }
-
-

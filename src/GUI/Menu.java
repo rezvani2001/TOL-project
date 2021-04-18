@@ -5,8 +5,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+
+import java.io.File;
 
 public class Menu extends Stage {
     private VBox mainPane;
@@ -48,9 +51,8 @@ public class Menu extends Stage {
     private void makeSaveButton() {
         Button saveButton = new Button("Save");
         saveButton.setOnMouseClicked(event -> {
-            Draw.save();
+            new SelectSaveMode();
             this.close();
-            new Alert(Alert.AlertType.INFORMATION, "The file saved successfully in output.xml").showAndWait();
         });
         this.mainPane.getChildren().add(saveButton);
     }
@@ -90,7 +92,7 @@ public class Menu extends Stage {
         this.mainPane.getChildren().add(exitButton);
     }
 
-    private void makeBackButton(){
+    private void makeBackButton() {
         Button back = new Button("back to start menu");
         back.setOnAction(event -> {
             Stage stage = new Stage();
