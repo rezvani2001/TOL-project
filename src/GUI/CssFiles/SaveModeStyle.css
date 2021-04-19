@@ -1,11 +1,19 @@
 .root {
-    -fx-background-color: #d0af84;
+    -fx-background-color: #e1bc91;
 }
 
 .button {
-
+    -fx-pref-width: 160px;
+    -fx-pref-height: 50px;
+    -fx-background-color: #62959c;
+    -fx-background-radius: 35px;
+    -fx-border-radius: 35px;
+    -fx-font-family: "Segoe UI Black";
+    -fx-font-weight: bolder;
+    -fx-font-size: 17px;
 }
 
 .button:hover {
-
+    -fx-background-color: #eca3f5;
+    -fx-text-fill: white;
 }

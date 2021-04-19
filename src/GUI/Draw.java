@@ -46,32 +46,29 @@ public class Draw extends Application {
             filePath.getExtensionFilters().add(new FileChooser.ExtensionFilter("just xml files", "*.xml"));
 
             File selectedFile = filePath.showOpenDialog(stage);
-            stage.setOnCloseRequest(event1 -> {
-                if (selectedFile != null) {
-                    Thread thread = new Thread(() -> Main.main(selectedFile));
 
-                    thread.start();
-                    try {
-                        thread.join();
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-                    pane = new AnchorPane();
+            Thread thread = new Thread(() -> Main.main(selectedFile));
+
+            thread.start();
+            try {
+                thread.join();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            pane = new AnchorPane();
 
 
-                    thread = new Thread(() -> {
-                        for (State state : Main.automatas.states) {
-                            Platform.runLater(() -> pane.getChildren().add(state.statePane()));
-                        }
+            thread = new Thread(() -> {
+                for (State state : Main.automatas.states) {
+                    Platform.runLater(() -> pane.getChildren().add(state.statePane()));
+                }
 
-                        for (Transitions transition : Main.automatas.transitions) {
-                            transition.transitionPane();
-                        }
-                    });
-                    thread.start();
-                    mainPage(primaryStage);
+                for (Transitions transition : Main.automatas.transitions) {
+                    transition.transitionPane();
                 }
             });
+            thread.start();
+            mainPage(primaryStage);
         });
 
 
@@ -213,7 +210,7 @@ public class Draw extends Application {
                 buffer.write("\t</Automata>\n");
                 buffer.flush();
                 file.close();
-                new Alert(Alert.AlertType.INFORMATION, "Saved Successfully").showAndWait();
+                Platform.runLater(() -> new Alert(Alert.AlertType.INFORMATION, "Saved Successfully").showAndWait());
             } catch (Exception e) {
                 e.printStackTrace();
             }

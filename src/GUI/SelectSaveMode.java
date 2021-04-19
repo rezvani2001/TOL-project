@@ -1,5 +1,6 @@
 package GUI;
 
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -26,24 +27,24 @@ public class SelectSaveMode extends Stage {
         scene.getStylesheets().add("GUI/CssFiles/SaveModeStyle.css");
         this.setScene(scene);
         this.initModality(Modality.APPLICATION_MODAL);
+        this.setTitle("Select Save Mode");
         this.show();
     }
 
     private void makeButtons() {
         HBox hBox = new HBox(10);
+        hBox.setAlignment(Pos.CENTER);
         Button saveNewFile = new Button("New File");
-        Button saveExistingFile = new Button("Brows...");
+        Button saveExistingFile = new Button("Browse...");
         saveExistingFile.setOnMouseClicked(event -> {
             Stage stage = new Stage();
             FileChooser fileChooser = new FileChooser();
             fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("just xml files", "*.xml"));
             File handler = fileChooser.showOpenDialog(stage);
-            stage.setOnCloseRequest(event1 -> {
-                if (handler != null) {
-                    Draw.save(handler);
-                    this.close();
-                }
-            });
+            if (handler != null) {
+                Draw.save(handler);
+                this.close();
+            }
         });
 
         saveNewFile.setOnMouseClicked(event -> {
@@ -53,5 +54,6 @@ public class SelectSaveMode extends Stage {
 
         hBox.getChildren().addAll(saveExistingFile, saveNewFile);
         root.setCenter(hBox);
+        BorderPane.setAlignment(hBox, Pos.CENTER);
     }
 }
