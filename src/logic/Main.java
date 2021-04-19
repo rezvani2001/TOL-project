@@ -10,7 +10,6 @@ import logic.readXML.States.MainState;
 import logic.readXML.Transitions.MainTransition;
 
 import java.io.File;
-import java.util.Arrays;
 import java.util.Collections;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;

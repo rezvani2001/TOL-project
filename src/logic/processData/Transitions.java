@@ -20,7 +20,7 @@ public class Transitions {
 
     public String label;
 
-    public List<String> alphabet = new ArrayList();
+    public List<String> alphabet = new ArrayList<>();
 
     public State start;
     public State end;
@@ -86,25 +86,23 @@ public class Transitions {
                     this.end.centerX, this.end.centerY
             ).pane;
 
-            transitionPane.getChildren().get(0).setOnMouseClicked(event -> {
-                Platform.runLater(() -> {
-                    if (event.getButton() == MouseButton.PRIMARY)
-                        new TransitionAddOrEdit(String.format("Edit Transition %s", this.name), this);
-                    else if (event.getButton() == MouseButton.SECONDARY) {
-                        new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete transition "
-                                + this.name + "?", ButtonType.YES, ButtonType.NO)
-                                .showAndWait().ifPresent(buttonType -> {
-                            if (buttonType == ButtonType.YES) {
-                                Main.automatas.transitions.remove(this);
-                                this.start.outputTR.remove(this);
-                                this.end.inputTR.remove(this);
+            transitionPane.getChildren().get(0).setOnMouseClicked(event -> Platform.runLater(() -> {
+                if (event.getButton() == MouseButton.PRIMARY)
+                    new TransitionAddOrEdit(String.format("Edit Transition %s", this.name), this);
+                else if (event.getButton() == MouseButton.SECONDARY) {
+                    new Alert(Alert.AlertType.CONFIRMATION, "Are you sure you want to delete transition "
+                            + this.name + "?", ButtonType.YES, ButtonType.NO)
+                            .showAndWait().ifPresent(buttonType -> {
+                        if (buttonType == ButtonType.YES) {
+                            Main.automatas.transitions.remove(this);
+                            this.start.outputTR.remove(this);
+                            this.end.inputTR.remove(this);
 
-                                Draw.pane.getChildren().remove(this.uiTR);
-                            }
-                        });
-                    }
-                });
-            });
+                            Draw.pane.getChildren().remove(this.uiTR);
+                        }
+                    });
+                }
+            }));
 
 
             Platform.runLater(() -> {

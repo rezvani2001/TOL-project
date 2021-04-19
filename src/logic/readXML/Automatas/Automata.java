@@ -6,7 +6,6 @@ import logic.readXML.Transitions.TransitionCase;
 
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.ArrayList;
 
 @XmlRootElement(name = "Automata")
 public class Automata {

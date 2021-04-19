@@ -2,14 +2,11 @@ package GUI;
 
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
-import javafx.stage.FileChooser;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-import java.io.File;
 
 public class Menu extends Stage {
     private VBox mainPane;
@@ -26,9 +23,9 @@ public class Menu extends Stage {
         this.mainPane.setAlignment(Pos.CENTER);
         this.makeSaveButton();
         this.makeAddNewAlphabetButton();
+        this.makeDeleteAlphabetButton();
         this.makeAddNewStateButton();
         this.makeAddNewTransitionButton();
-        this.makeDeleteAlphabetButton();
         this.makeBackButton();
         this.makeExitButton();
         Scene scene = new Scene(this.mainPane, 300, 545);
@@ -42,9 +39,7 @@ public class Menu extends Stage {
 
     private void makeAddNewAlphabetButton() {
         Button addNewAlphabet = new Button("Add Alphabet");
-        addNewAlphabet.setOnMouseClicked(event -> {
-            new DeleteAlphabet(StageMode.ADD);
-        });
+        addNewAlphabet.setOnMouseClicked(event -> new DeleteAlphabet(StageMode.ADD));
         this.mainPane.getChildren().add(addNewAlphabet);
     }
 
@@ -77,9 +72,7 @@ public class Menu extends Stage {
 
     private void makeDeleteAlphabetButton() {
         Button deleteAlphabet = new Button("Delete Alphabet");
-        deleteAlphabet.setOnMouseClicked(event -> {
-            new DeleteAlphabet(StageMode.DELETE);
-        });
+        deleteAlphabet.setOnMouseClicked(event -> new DeleteAlphabet(StageMode.DELETE));
         this.mainPane.getChildren().add(deleteAlphabet);
     }
 

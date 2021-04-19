@@ -56,9 +56,7 @@ public class State {
 
                         Main.automatas.states.remove(this);
 
-                        Platform.runLater(() -> {
-                            Draw.pane.getChildren().remove(circlePane);
-                        });
+                        Platform.runLater(() -> Draw.pane.getChildren().remove(circlePane));
 
                         for (Transitions tr : this.inputTR) {
                             Main.automatas.transitions.remove(tr);
